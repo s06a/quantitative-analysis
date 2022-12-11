@@ -1,4 +1,4 @@
-# learn portfolio management
+# Learn Portfolio Management
 
 Learn portfolio management using python
 
