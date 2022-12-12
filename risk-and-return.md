@@ -71,13 +71,17 @@ np.prod(returns + 1) - 1
 ```
 
 ### annual return
-we assume that we have 252 financial days in a year, 12 months, 4 quarters (seasons)
+we have 252 financial days, 12 months, and 4 quarters in a year
 
 ```math
 R_{a} = ((1 + R_{d})^{252} - 1)
-R_{a} = ((1 + R_{m})^{12} - 1)
-R_{a} = ((1 + R_{q})^{4} - 1)
 ```
 
+```math
+R_{a} = ((1 + R_{m})^{12} - 1)
+```
 
+```math
+R_{a} = ((1 + R_{q})^{4} - 1)
+```
 
