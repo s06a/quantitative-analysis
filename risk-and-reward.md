@@ -89,5 +89,5 @@ R_{a} = ((1 + R_{q})^{4} - 1)
 
 variance
 ```math
-\sigma_{R}^2 = \farc{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2
+\sigma_{R}^2 = \frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2
 ```
