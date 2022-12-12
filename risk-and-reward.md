@@ -110,5 +110,5 @@ A year has 252 days and 12 months
 
 ### sharp ratio
 ```math
-sharp \space ratio = \frac{R_{p} - R_{risk \space free}}{volatility}
+sharp \space ratio (p) = \frac{R_{p} - R_{risk \space free}}{\sigma_{p}}
 ```
