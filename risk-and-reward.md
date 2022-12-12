@@ -28,9 +28,6 @@ R_{t, t+1} = \frac{P_{t+1} + D_{t,t+1}}{P_{t} - 1}
 ```
 
 ```python
-import numpy as np
-import pandas as pd
-
 # in numpy
 prices = np.array([4, 5, 8.56, 9.41])
 prices[1:]/prices[:-1] - 1 # will return the returns
@@ -111,4 +108,17 @@ A year has 252 days and 12 months
 ### sharp ratio
 ```math
 sharp \space ratio (p) = \frac{R_{p} - R_{risk \space free}}{\sigma_{p}}
+```
+
+```python
+prices = pd.read_csv(path_to_a_dataframe_saved_as_csv,
+		     header=0, index_col=0, parse_dates=True,
+		     na_values=-99.99)
+
+returns = prices.pct_change()
+
+returns.dropna(inplace=True) # to drop first row
+
+returns.std()
+
 ```
