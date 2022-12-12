@@ -10,6 +10,8 @@
 	* [volatility](#volatility)
 		* [variance](#variance)
 		* [standard deviation](#standard-deviation)
+		* [annualizing volatility](#annualizing-volatility)
+		* [sharp ratio](#sharp-ratio)
 
 <!-- vim-markdown-toc -->
 
@@ -97,4 +99,16 @@ R_{a} = ((1 + R_{q})^{4} - 1)
 ### standard deviation
 ```math
 \sigma_{R} = \sqrt{\frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2}
+```
+
+### annualizing volatility
+
+A year has 252 days and 12 months
+```math
+\sigma_{ann} = \sigma_{p}\sqrt{p}
+```
+
+### sharp ratio
+```math
+sharp ratio = \frac{R_{p} - R_{risk free}}{volatility}
 ```
