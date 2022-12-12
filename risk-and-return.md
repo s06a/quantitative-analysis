@@ -20,16 +20,6 @@ simple return
 R_{t, t+1} = \frac{P_{t+1} + D_{t,t+1}}{P_{t} - 1}
 ```
 
-multi period return
-```math
-R_{t,t+2} = (1 + R_{t,t+1})(1 + R_{t+1, t+2}) - 1
-```
-
-annual return based on monthly return
-```math
-R_{a} = ((1 + R_{m})^{12} - 1)
-```
-
 example
 ```python
 import numpy as np
@@ -63,9 +53,24 @@ returns.std()
 # mean of returns for each stock
 returns.mean()
 
+```
+
+multi period return
+```math
+R_{t,t+2} = (1 + R_{t,t+1})(1 + R_{t+1, t+2}) - 1
+```
+
+```python
 # multi period return using numpy
 np.prod(returns + 1) - 1
 
 # multi period return using pandas
 (returns + 1).prod() - 1
 ```
+
+annual return based on monthly return
+```math
+R_{a} = ((1 + R_{m})^{12} - 1)
+```
+
+
