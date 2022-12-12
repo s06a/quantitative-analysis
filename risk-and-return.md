@@ -4,6 +4,9 @@
 
 * [Risk and Return](#risk-and-return)
 	* [return of assets](#return-of-assets)
+		* [simple return](#simple-return)
+		* [multi period return](#multi-period-return)
+		* [annual return](#annual-return)
 
 <!-- vim-markdown-toc -->
 
@@ -13,9 +16,8 @@ average return is misleading, having the same average return doesn't mean that y
 
 ## return of assets
 
-we assume that we have 252 financial days in a year
 
-simple return
+### simple return
 ```math
 R_{t, t+1} = \frac{P_{t+1} + D_{t,t+1}}{P_{t} - 1}
 ```
@@ -55,7 +57,7 @@ returns.mean()
 
 ```
 
-multi period return
+### multi period return
 ```math
 R_{t,t+2} = (1 + R_{t,t+1})(1 + R_{t+1, t+2}) - 1
 ```
@@ -68,9 +70,14 @@ np.prod(returns + 1) - 1
 (returns + 1).prod() - 1
 ```
 
-annual return based on monthly return
+### annual return
+we assume that we have 252 financial days in a year, 12 months, 4 quarters (seasons)
+
 ```math
+R_{a} = ((1 + R_{d})^{252} - 1)
 R_{a} = ((1 + R_{m})^{12} - 1)
+R_{a} = ((1 + R_{q})^{4} - 1)
 ```
+
 
 
