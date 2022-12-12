@@ -126,7 +126,7 @@ annualized_volatility = returns.sdt() * np.sqrt(12) # no matter how many months 
 
 ### sharpe ratio
 
-sharp ration (risk adjusted return) of small cap stocks is more than large cap stocks, eventhough their return per volatility is almost the same.
+sharp ratio (risk adjusted return) of small cap stocks is larger than large cap stocks, eventhough their return per volatility is almost the same.
  
 ```math
 sharp \space ratio (p) = \frac{R_{p} - R_{risk \space free}}{\sigma_{p}}
@@ -134,10 +134,10 @@ sharp \space ratio (p) = \frac{R_{p} - R_{risk \space free}}{\sigma_{p}}
 
 ```python
 risk_free_rate = 0.03
-number_of_months = prices.shape[0]
+number_of_months = returns.shape[0] # first number is length of each column
 monthly_return = (returns + 1).prod()**(1 / number_of_months) - 1
 annualized_return = (monthly_return + 1)**12 - 1
 excess_return = annualized_return - risk_free_return
-sharpe_ration = excess_return/annualized_volatility
+sharpe_ratio = excess_return/annualized_volatility
 
 ```
