@@ -41,7 +41,7 @@ prices[1:]/prices[:-1] - 1 # will return the returns
 prices = pd.DataFrame({"stock_a": [1, 2, 3],
 		       "stock_b": [1.5, 2.2, 2.6]
 		      })
-prices.iloc[1:].values/prices.iloc[:-1] - 1 # one should be with no index to return dataframe corectly
+prices.iloc[1:].values/prices.iloc[:-1] - 1 # one should be with no index to return dataframe correctly
 
 # better way in pandas
 prices/prices.shift(1) - 1
