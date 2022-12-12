@@ -7,7 +7,9 @@
 		* [simple return](#simple-return)
 		* [multi period return](#multi-period-return)
 		* [annual return](#annual-return)
-	* [volatility (std)](#volatility-std)
+	* [volatility](#volatility)
+		* [variance](#variance)
+		* [standard deviation](#standard-deviation)
 
 <!-- vim-markdown-toc -->
 
@@ -85,9 +87,14 @@ R_{a} = ((1 + R_{m})^{12} - 1)
 R_{a} = ((1 + R_{q})^{4} - 1)
 ```
 
-## volatility (std)
+## volatility
 
-variance
+### variance
 ```math
 \sigma_{R}^2 = \frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2
+```
+
+### standard deviation
+```math
+\sigma_{R} = \sqrt{\frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2}
 ```
