@@ -22,7 +22,6 @@ average return is misleading, having the same average return doesn't mean that y
 R_{t, t+1} = \frac{P_{t+1} + D_{t,t+1}}{P_{t} - 1}
 ```
 
-example
 ```python
 import numpy as np
 import pandas as pd
