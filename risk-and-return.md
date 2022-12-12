@@ -13,6 +13,8 @@ average return is misleading, having the same average return doesn't mean that y
 
 ## return of assets
 
+we assume that we have 252 financial days in a year
+
 simple return
 ```math
 R_{t, t+1} = \frac{P_{t+1} + D_{t,t+1}}{P_{t} - 1}
@@ -47,5 +49,23 @@ prices.iloc[1:].values/prices.iloc[:-1] - 1 # one should be with no index to ret
 prices/prices.shift(1) - 1
 
 # using pure pandas
-prices.pct_change()
+returns = prices.pct_change()
+
+# to plot prices
+prices.plot()
+
+# to plot returns using bar plot
+prices.plot.bar()
+
+# to see standard deviation of returns for each stock
+returns.std()
+
+# mean of returns for each stock
+returns.mean()
+
+# multi period return using numpy
+np.prod(returns + 1) - 1
+
+# multi period return using pandas
+(returns + 1).prod() - 1
 ```
