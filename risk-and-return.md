@@ -13,5 +13,5 @@ average return is misleading, having the same average return doesn't mean that y
 
 ##return of an asset
 ```math
-R_{t, t+1} = (P_{t+1} - P_{t})/(P_{t})
+R_{t, t+1} = \frac{P_{t+1} - P_{t}}{P_{t}}
 ```
