@@ -160,8 +160,7 @@ returns = prices.pct_change()
 # better to have dates as index
 returns.index = pd.datetime(returns.index, format="%Y$m")
 
-# we can also change the period from daily to monthly (if we have one row for each month, daily format is not helpful anymore)
-
+# we can also change the period from daily to monthly (if we have one row for each month)
 returns.index = returns.index.to_period('M')
 # > 1991-01-01 --> 1991-01
 
