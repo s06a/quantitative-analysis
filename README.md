@@ -12,7 +12,7 @@ Learn portfolio management using python
 <!-- vim-markdown-toc -->
 
 # Chapters
--Risk and return
+- Risk and return
 	- prepare data
 	- return of assets
 		- simple return
