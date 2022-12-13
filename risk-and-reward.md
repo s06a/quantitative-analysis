@@ -33,7 +33,7 @@ returns.index = pd.datetime(returns.index, format="%Y$m")
 returns.index = returns.index.to_period('M')
 # > 1991-01-01 --> 1991-01
 
-to see all datas in a specific year
+# to see all datas in a specific year
 returns["1991"]
 # > brings all rows from 1991
 ```
