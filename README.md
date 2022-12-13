@@ -27,3 +27,4 @@ Learn portfolio management using python
   - Basics of asset management
   - CAPM
   - Multifactor models
+  - ...
