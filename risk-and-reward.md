@@ -7,11 +7,15 @@
 		* [simple return](#simple-return)
 		* [multi period return](#multi-period-return)
 		* [annual return](#annual-return)
-	* [volatility](#volatility)
-		* [variance](#variance)
-		* [standard deviation](#standard-deviation)
-		* [annualizing volatility](#annualizing-volatility)
-		* [sharpe ratio](#sharpe-ratio)
+	* [risk](#risk)
+		* [volatility](#volatility)
+			* [variance](#variance)
+			* [standard deviation](#standard-deviation)
+			* [annualizing volatility](#annualizing-volatility)
+			* [sharpe ratio](#sharpe-ratio)
+			* [max drawdown](#max-drawdown)
+				* [wealth index](#wealth-index)
+		* [calmar ratio](#calmar-ratio)
 
 <!-- vim-markdown-toc -->
 
@@ -86,14 +90,16 @@ R_{a} = ((1 + R_{m})^{12} - 1)
 R_{a} = ((1 + R_{q})^{4} - 1)
 ```
 
-## volatility
+## risk
 
-### variance
+### volatility
+
+#### variance
 ```math
 \sigma_{R}^2 = \frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2
 ```
 
-### standard deviation
+#### standard deviation
 ```math
 \sigma_{R} = \sqrt{\frac{1}{N}\Sigma_{i=1}^{N}(R_{i}-\bar{R})^2}
 ```
@@ -113,7 +119,7 @@ returns.dropna(inplace=True) # to drop first row
 returns.std()
 ```
 
-### annualizing volatility
+#### annualizing volatility
 
 A year has 252 days and 12 months
 ```math
@@ -124,7 +130,7 @@ A year has 252 days and 12 months
 annualized_volatility = returns.sdt() * np.sqrt(12) # no matter how many months we have in data
 ```
 
-### sharpe ratio
+#### sharpe ratio
 
 sharp ratio (risk adjusted return) of small cap stocks is larger than large cap stocks, eventhough their return per volatility is almost the same.
  
@@ -141,3 +147,17 @@ excess_return = annualized_return - risk_free_return
 sharpe_ratio = excess_return/annualized_volatility
 
 ```
+
+#### max drawdown
+
+it is the worst possible return (going from the peak to bottom)
+
+##### wealth index
+hypothetical buy and hold investment in an asset or portfolio (1$ or 1000$) to see how the wealth fluctuates during the investment period and how much money you'll have
+
+find previous peaks at any point in time
+
+### calmar ratio
+ratio of the annualized return over the trailing 36 months to the maximum drawdown over those trailing 36 months
+
+
