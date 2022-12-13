@@ -152,41 +152,22 @@ sharpe_ratio = excess_return/annualized_volatility
 
 it is the worst possible return (going from the peak to bottom)
 
-```python
-def drawdown(investment_budget, return_series: pd.Series):
-	"""
-	takes a series fo asset returns
-	returns a dataframe of below values:
-		the wealth index
-		the previous peaks
-		percent of drawdown
-	"""
-	wealth_index = investment_budget * (1 + return_series).cumprod()
-	previous_peaks = wealth_index.cummax()
-	drawdowns = (wealth_index - previous_peaks)/previous_peaks
-	return pd.DataFrame({
-		"wealth": wealth_index,
-		"peaks": previous_peaks,
-		"drawdown": drawdowns
-	})
-```
 
+prepare data
 ```python
 returns = prices.pct_change()
 
-'''
-better to have dates as index pd.to_datetime() can help
-
+# better to have dates as index
 returns.index = pd.datetime(returns.index, format="%Y$m")
 
-we can also change the period from daily to monthly (if we have one row for each month, daily format is not helpful anymore)
+# we can also change the period from daily to monthly (if we have one row for each month, daily format is not helpful anymore)
 
 returns.index = returns.index.to_period('M')
-> 1991-01-01 --> 1991-01
+# > 1991-01-01 --> 1991-01
 
 to see all datas in a specific year
 returns["1991"]
-> brings all rows from 1991
+# > brings all rows from 1991
 ```
 
 ##### wealth index
@@ -207,8 +188,7 @@ previous_peaks = wealth_index.cummax()
 ```python
 drawdown = (wealth_index - previous_peaks)/previous_peaks # returns percentage
 
-'''
-to see the maximum drawdown in a period
+#to see the maximum drawdown in a period
 
 from = "1991"
 drawdown[period:].min()
@@ -216,7 +196,29 @@ drawdown[period:].min()
 to get index (date) of the maximum drawdown
 drawdown[period:].idxmin()
 # idxmin() return the index of the row
+
 ```
+
+it's better to wrap all these calculations in a function
+```python
+def drawdown(investment_budget, return_series: pd.Series):
+	"""
+	takes a series fo asset returns
+	returns a dataframe of below values:
+		the wealth index
+		the previous peaks
+		percent of drawdown
+	"""
+	wealth_index = investment_budget * (1 + return_series).cumprod()
+	previous_peaks = wealth_index.cummax()
+	drawdowns = (wealth_index - previous_peaks)/previous_peaks
+	return pd.DataFrame({
+		"wealth": wealth_index,
+		"peaks": previous_peaks,
+		"drawdown": drawdowns
+	})
+```
+
 
 ### calmar ratio
 ratio of the annualized return over the trailing 36 months to the maximum drawdown over those trailing 36 months
