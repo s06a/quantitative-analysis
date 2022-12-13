@@ -175,7 +175,7 @@ hypothetical buy and hold investment in an asset or portfolio (1$ or 1000$) to s
 
 ```python
 # if we invest 100$ in an asset
-wealth_index = 100 * (1+returns['whatever_asset_you_want']).cumprod()
+wealth_index = 100 * (1 + returns['whatever_asset_you_want']).cumprod()
 # cumprod() computes the comulative product in a moving forward form and returns a column of wealth (each row's value shows the wealth at that month)
 ```
 
@@ -203,15 +203,15 @@ drawdown[period:].idxmin()
 ##### drawdown function
 it's better to wrap all these calculations in a function
 ```python
-def drawdown(investment_budget, return_series: pd.Series):
+def drawdown(investment_budget, returns_series: pd.Series):
 	"""
-	takes a series fo asset returns
+	takes a series of asset returns
 	returns a dataframe of below values:
 		the wealth index
 		the previous peaks
 		percent of drawdown
 	"""
-	wealth_index = investment_budget * (1 + return_series).cumprod()
+	wealth_index = investment_budget * (1 + returns_series).cumprod()
 	previous_peaks = wealth_index.cummax()
 	drawdowns = (wealth_index - previous_peaks)/previous_peaks
 	return pd.DataFrame({
@@ -219,6 +219,11 @@ def drawdown(investment_budget, return_series: pd.Series):
 		"peaks": previous_peaks,
 		"drawdown": drawdowns
 	})
+```
+
+```python
+# to plot wealth index and previous peaks from period till now
+drawdown(returns_series[period:])[['wealth', 'peaks']].plot()
 ```
 
 ### calmar ratio
