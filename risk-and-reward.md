@@ -2,6 +2,7 @@
 
 <!-- vim-markdown-toc GFM -->
 
+* [Prepare data](#prepare-data)
 * [Risk and Return](#risk-and-return)
 	* [return of assets](#return-of-assets)
 		* [simple return](#simple-return)
@@ -15,16 +16,33 @@
 			* [sharpe ratio](#sharpe-ratio)
 			* [max drawdown](#max-drawdown)
 				* [wealth index](#wealth-index)
+				* [previous peaks](#previous-peaks)
+				* [drawdown](#drawdown)
+				* [drawdown function](#drawdown-function)
 		* [calmar ratio](#calmar-ratio)
 
 <!-- vim-markdown-toc -->
+
+# Prepare data
+
+```python
+# better to have dates as index
+returns.index = pd.datetime(returns.index, format="%Y$m")
+
+# we can also change the period from daily to monthly (if we have one row for each month)
+returns.index = returns.index.to_period('M')
+# > 1991-01-01 --> 1991-01
+
+to see all datas in a specific year
+returns["1991"]
+# > brings all rows from 1991
+```
 
 # Risk and Return
 
 average return is misleading, having the same average return doesn't mean that you're gonna end up with the same amount of money
 
 ## return of assets
-
 
 ### simple return
 ```math
@@ -152,23 +170,6 @@ sharpe_ratio = excess_return/annualized_volatility
 
 it is the worst possible return (going from the peak to bottom)
 
-
-prepare data
-```python
-returns = prices.pct_change()
-
-# better to have dates as index
-returns.index = pd.datetime(returns.index, format="%Y$m")
-
-# we can also change the period from daily to monthly (if we have one row for each month)
-returns.index = returns.index.to_period('M')
-# > 1991-01-01 --> 1991-01
-
-to see all datas in a specific year
-returns["1991"]
-# > brings all rows from 1991
-```
-
 ##### wealth index
 hypothetical buy and hold investment in an asset or portfolio (1$ or 1000$) to see how the wealth fluctuates during the investment period and how much money you'll have
 
@@ -178,12 +179,13 @@ wealth_index = 100 * (1+returns['whatever_asset_you_want']).cumprod()
 # cumprod() computes the comulative product in a moving forward form and returns a column of wealth (each row's value shows the wealth at that month)
 ```
 
-find previous peaks at any point in time
+##### previous peaks
 ```python
 previous_peaks = wealth_index.cummax()
 # cummax() returns the max value till every time step (moves forward)
 ```
 
+##### drawdown
 ```python
 drawdown = (wealth_index - previous_peaks)/previous_peaks # returns percentage
 
@@ -198,6 +200,7 @@ drawdown[period:].idxmin()
 
 ```
 
+##### drawdown function
 it's better to wrap all these calculations in a function
 ```python
 def drawdown(investment_budget, return_series: pd.Series):
@@ -217,7 +220,6 @@ def drawdown(investment_budget, return_series: pd.Series):
 		"drawdown": drawdowns
 	})
 ```
-
 
 ### calmar ratio
 ratio of the annualized return over the trailing 36 months to the maximum drawdown over those trailing 36 months
