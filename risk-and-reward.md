@@ -152,10 +152,71 @@ sharpe_ratio = excess_return/annualized_volatility
 
 it is the worst possible return (going from the peak to bottom)
 
+```python
+def drawdown(investment_budget, return_series: pd.Series):
+	"""
+	takes a series fo asset returns
+	returns a dataframe of below values:
+		the wealth index
+		the previous peaks
+		percent of drawdown
+	"""
+	wealth_index = investment_budget * (1 + return_series).cumprod()
+	previous_peaks = wealth_index.cummax()
+	drawdowns = (wealth_index - previous_peaks)/previous_peaks
+	return pd.DataFrame({
+		"wealth": wealth_index,
+		"peaks": previous_peaks,
+		"drawdown": drawdowns
+	})
+```
+
+```python
+returns = prices.pct_change()
+
+'''
+better to have dates as index pd.to_datetime() can help
+
+returns.index = pd.datetime(returns.index, format="%Y$m")
+
+we can also change the period from daily to monthly (if we have one row for each month, daily format is not helpful anymore)
+
+returns.index = returns.index.to_period('M')
+> 1991-01-01 --> 1991-01
+
+to see all datas in a specific year
+returns["1991"]
+> brings all rows from 1991
+```
+
 ##### wealth index
 hypothetical buy and hold investment in an asset or portfolio (1$ or 1000$) to see how the wealth fluctuates during the investment period and how much money you'll have
 
+```python
+# if we invest 100$ in an asset
+wealth_index = 100 * (1+returns['whatever_asset_you_want']).cumprod()
+# cumprod() computes the comulative product in a moving forward form and returns a column of wealth (each row's value shows the wealth at that month)
+```
+
 find previous peaks at any point in time
+```python
+previous_peaks = wealth_index.cummax()
+# cummax() returns the max value till every time step (moves forward)
+```
+
+```python
+drawdown = (wealth_index - previous_peaks)/previous_peaks # returns percentage
+
+'''
+to see the maximum drawdown in a period
+
+from = "1991"
+drawdown[period:].min()
+
+to get index (date) of the maximum drawdown
+drawdown[period:].idxmin()
+# idxmin() return the index of the row
+```
 
 ### calmar ratio
 ratio of the annualized return over the trailing 36 months to the maximum drawdown over those trailing 36 months
