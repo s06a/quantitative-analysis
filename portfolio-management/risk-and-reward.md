@@ -66,9 +66,6 @@ prices/prices.shift(1) - 1
 # using pure pandas
 returns = prices.pct_change()
 
-# to plot prices
-prices.plot()
-
 # to plot returns using bar plot
 prices.plot.bar()
 
